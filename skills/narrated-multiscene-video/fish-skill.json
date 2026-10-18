@@ -1,6 +1,6 @@
 {
   "id": "narrated-multiscene-video",
-  "version": "0.1.0-candidate.6",
+  "version": "0.1.0-candidate.6+m2",
   "title": {
     "en": "Narrated Multi-Scene Video",
     "es": "Video narrado de varias escenas",
@@ -90,5 +90,21 @@
         "拿到主题前不开始付费生成"
       ]
     }
-  ]
+  ],
+  "triggers": {
+    "should": [
+      "把这个故事做成一条带旁白的多场景短片",
+      "做一条 60 秒的科普视频，讲水的循环，配旁白",
+      "把我的脚本做成解说视频，每个场景配音对齐",
+      "做一个讲品牌历史的旁白短片，有固定主角",
+      "用水彩风格讲一个童话故事，5 个场景加配音"
+    ],
+    "should_not": [
+      "用产品照片做一条带货短视频",
+      "复刻这段舞蹈",
+      "给视频做封面",
+      "做一组电商主图",
+      "把这张照片里的人换个衣服"
+    ]
+  }
 }

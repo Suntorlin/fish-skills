@@ -1,6 +1,6 @@
 {
   "id": "reference-recreation",
-  "version": "0.2.0-candidate.5",
+  "version": "0.2.0-candidate.5+m2",
   "title": {
     "en": "Video Motion Recreation",
     "es": "Recreación de movimiento en video",
@@ -81,5 +81,21 @@
         "拿到视频前不开始付费生成"
       ]
     }
-  ]
+  ],
+  "triggers": {
+    "should": [
+      "照着这段舞蹈视频，让我的角色跳一遍",
+      "把参考视频里的人换成我上传的角色，动作不变",
+      "复刻这段走路的镜头，换成我的形象",
+      "这段 TikTok 动作我想用自己的角色重做一遍",
+      "按这个视频的动作和镜头再做一条"
+    ],
+    "should_not": [
+      "做一张视频封面",
+      "把产品照片做成主图",
+      "写一个 60 秒的科普脚本并做成视频",
+      "给角色画三视图",
+      "帮我剪掉视频里的口误"
+    ]
+  }
 }
