@@ -1,0 +1,86 @@
+{
+  "id": "thumbnail-cover",
+  "version": "0.3.0-candidate.3",
+  "title": {
+    "en": "Thumbnail & Cover",
+    "es": "Miniatura y portada",
+    "pt": "Miniatura e capa",
+    "ja": "サムネイル・カバー",
+    "ru": "Превью и обложка",
+    "fr": "Miniature et couverture",
+    "de": "Thumbnail und Cover",
+    "ar": "صورة مصغرة وغلاف",
+    "zh-CN": "视频封面",
+    "ko": "썸네일·커버"
+  },
+  "description": {
+    "en": "Designs a video thumbnail or content cover from your topic, in landscape, portrait or square format, with an optional title on the image.",
+    "es": "Diseña una miniatura de video o una portada a partir de tu tema, en formato horizontal, vertical o cuadrado, con un título opcional sobre la imagen.",
+    "pt": "Cria uma miniatura de vídeo ou capa de conteúdo a partir do seu tema, no formato horizontal, vertical ou quadrado, com título opcional na imagem.",
+    "ja": "動画やコンテンツのテーマをもとに、横長・縦長・正方形のサムネイルやカバー画像を、必要ならタイトル文字入りで作ります。",
+    "ru": "Создаёт превью для видео или обложку по вашей теме в горизонтальном, вертикальном или квадратном формате, при желании с заголовком на изображении.",
+    "fr": "Conçoit une miniature vidéo ou une couverture à partir de votre sujet, au format paysage, portrait ou carré, avec un titre sur l'image si vous le souhaitez.",
+    "de": "Gestaltet aus Ihrem Thema ein Video-Thumbnail oder Cover im Quer-, Hoch- oder Quadratformat, auf Wunsch mit Titel im Bild.",
+    "ar": "يصمم صورة مصغرة للفيديو أو غلافًا للمحتوى انطلاقًا من موضوعك، بتنسيق أفقي أو عمودي أو مربع، مع عنوان على الصورة إن أردت.",
+    "zh-CN": "根据视频或内容主题做横版、竖版或方形封面，可按需在图上加标题文字。",
+    "ko": "영상이나 콘텐츠 주제를 바탕으로 가로, 세로, 정사각형 썸네일이나 커버를 만들고, 원하면 이미지에 제목을 넣습니다."
+  },
+  "inputs": [
+    {
+      "name": "content_summary",
+      "type": "long_text",
+      "required": true,
+      "default": null
+    },
+    {
+      "name": "cover_text",
+      "type": "text",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "aspect_ratio",
+      "type": "text",
+      "required": false,
+      "default": "16:9"
+    },
+    {
+      "name": "reference_image",
+      "type": "image",
+      "required": false,
+      "default": null
+    }
+  ],
+  "paid_tools": [
+    "image_generation",
+    "image_edit"
+  ],
+  "preview": {
+    "cover": "preview/cover.jpg",
+    "video": "preview/demo.mp4"
+  },
+  "evals": [
+    {
+      "id": "happy-path",
+      "prompt": "我做了一期 B 站视频，讲我用 30 天自学做出第一款独立游戏的过程。封面要 16:9，上面写「30天做出我的第一款游戏」，主角是一个卡通风格的程序员，不用真人。",
+      "expected_output": "给出一个清晰的封面方案（主体、构图、文字处理方式），原样使用用户给的标题，先说明会花积分并等用户确认再生成。",
+      "assertions": [
+        "封面文字原样使用「30天做出我的第一款游戏」",
+        "说明文字是直接生成在图里还是后期排版",
+        "生成前先说明会花积分并请用户确认",
+        "不编造视频里没有的成果或数据"
+      ]
+    },
+    {
+      "id": "missing-inputs",
+      "prompt": "帮我做个视频封面，要抓眼球一点。",
+      "expected_output": "追问视频讲什么；可以说明没指定时默认做一张 16:9 封面。",
+      "assertions": [
+        "追问视频的主题或内容",
+        "不编造视频内容就开始设计",
+        "不一次追问一长串非必要的问题",
+        "拿到视频内容前不开始付费生成"
+      ]
+    }
+  ]
+}

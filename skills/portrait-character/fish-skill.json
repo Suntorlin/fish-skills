@@ -1,0 +1,86 @@
+{
+  "id": "portrait-character",
+  "version": "0.1.0-candidate.3",
+  "title": {
+    "en": "Portrait & Character Image",
+    "es": "Retrato y personaje",
+    "pt": "Retrato e personagem",
+    "ja": "人物ポートレート",
+    "ru": "Портрет и персонаж",
+    "fr": "Portrait et personnage",
+    "de": "Porträt und Figur",
+    "ar": "صورة شخصية وشخصيات",
+    "zh-CN": "人像与角色图",
+    "ko": "인물·캐릭터 이미지"
+  },
+  "description": {
+    "en": "Creates or edits person-led images such as character portraits, avatars and editorial portraits, and uses your reference photo to keep the same person.",
+    "es": "Crea o edita imágenes centradas en personas, como retratos de personajes, avatares y retratos editoriales, y usa tu foto de referencia para mantener a la misma persona.",
+    "pt": "Cria ou edita imagens centradas em pessoas, como retratos de personagens, avatares e retratos editoriais, e usa sua foto de referência para manter a mesma pessoa.",
+    "ja": "キャラクターの肖像、アバター、雑誌風ポートレートなど人物中心の画像を作成・編集し、参考写真があれば同じ人物に近づけます。",
+    "ru": "Создаёт и редактирует изображения с людьми — портреты персонажей, аватары, редакционные портреты — и по вашему фото-референсу сохраняет того же человека.",
+    "fr": "Crée ou retouche des images centrées sur une personne, comme des portraits de personnage, des avatars ou des portraits éditoriaux, et s'appuie sur votre photo de référence pour garder la même personne.",
+    "de": "Erstellt oder bearbeitet personenzentrierte Bilder wie Figurenporträts, Avatare und Editorial-Porträts und nutzt Ihr Referenzfoto, um dieselbe Person beizubehalten.",
+    "ar": "ينشئ أو يعدّل صورًا تتمحور حول الأشخاص، مثل صور الشخصيات والأفاتار والبورتريهات التحريرية، ويستخدم صورتك المرجعية للحفاظ على الشخص نفسه.",
+    "zh-CN": "生成或修改以人物为主的图片，如角色肖像、头像和杂志风人像；有参考照片时用它保持同一个人。",
+    "ko": "캐릭터 초상화, 아바타, 에디토리얼 인물 사진 같은 인물 중심 이미지를 만들거나 수정하며, 참고 사진으로 같은 인물을 유지합니다."
+  },
+  "inputs": [
+    {
+      "name": "portrait_brief",
+      "type": "long_text",
+      "required": true,
+      "default": null
+    },
+    {
+      "name": "identity_reference",
+      "type": "image",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "aspect_ratio",
+      "type": "text",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "visual_style",
+      "type": "text",
+      "required": false,
+      "default": null
+    }
+  ],
+  "paid_tools": [
+    "image_generation",
+    "image_edit"
+  ],
+  "preview": {
+    "cover": "preview/cover.jpg",
+    "video": "preview/demo.mp4"
+  },
+  "evals": [
+    {
+      "id": "happy-path",
+      "prompt": "帮我画一个原创角色的半身肖像：30 岁左右的女机械师，短卷发，脸上有点油污，穿橙色工装，自信地笑，背景是车间。写实摄影风格，竖版 3:4，用作小说人设图。",
+      "expected_output": "复述人物设定和画面安排，说明这是新设计的虚构角色，先说明会花积分并等用户确认再生成。",
+      "assertions": [
+        "保留用户给出的年龄、发型、服装和表情",
+        "说明补充的细节是创作选择，不是用户给的事实",
+        "生成前先说明会花积分并请用户确认",
+        "不声称已经生成或检查过图片"
+      ]
+    },
+    {
+      "id": "missing-inputs",
+      "prompt": "帮我生成一张人物肖像，竖版，好看一点。",
+      "expected_output": "追问要画什么人物：新角色的描述，或真人、已有角色的参考照片。",
+      "assertions": [
+        "追问要画什么人物（角色描述或参考照片）",
+        "不自己编一个人物就直接生成",
+        "追问简短，只问缺的人物信息",
+        "拿到人物信息前不开始付费生成"
+      ]
+    }
+  ]
+}

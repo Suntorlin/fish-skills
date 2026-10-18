@@ -1,0 +1,85 @@
+{
+  "id": "reference-recreation",
+  "version": "0.2.0-candidate.5",
+  "title": {
+    "en": "Video Motion Recreation",
+    "es": "Recreación de movimiento en video",
+    "pt": "Recriação de movimento em vídeo",
+    "ja": "動画モーション再現",
+    "ru": "Повтор движений из видео",
+    "fr": "Recréation de mouvement vidéo",
+    "de": "Bewegungen aus Video nachstellen",
+    "ar": "إعادة إنشاء الحركة من فيديو",
+    "zh-CN": "视频动作复刻",
+    "ko": "영상 동작 재현"
+  },
+  "description": {
+    "en": "Recreates the actions in your reference video, such as a dance, with the original performer or with a character from your image.",
+    "es": "Recrea las acciones de tu video de referencia, como un baile, con el intérprete original o con un personaje de tu imagen.",
+    "pt": "Recria as ações do seu vídeo de referência, como uma dança, com o artista original ou com um personagem da sua imagem.",
+    "ja": "ダンスなど参考動画の動きを、元の出演者のまま、または画像のキャラクターに置き換えて再現します。",
+    "ru": "Повторяет действия из вашего видео-референса, например танец, с исходным исполнителем или с персонажем с вашего изображения.",
+    "fr": "Recrée les actions de votre vidéo de référence, comme une danse, avec l'interprète d'origine ou avec un personnage de votre image.",
+    "de": "Stellt die Bewegungen aus Ihrem Referenzvideo, etwa einen Tanz, mit der ursprünglichen Person oder mit einer Figur aus Ihrem Bild nach.",
+    "ar": "يعيد إنشاء الحركات في فيديو المرجع، مثل رقصة، بالمؤدي الأصلي أو بشخصية من صورتك.",
+    "zh-CN": "按你的参考视频复刻动作（如一段舞蹈），可保留原表演者，也可换成你图片里的角色。",
+    "ko": "참고 영상 속 동작(예: 춤)을 원래 출연자 그대로 또는 이미지 속 캐릭터로 바꿔 재현합니다."
+  },
+  "inputs": [
+    {
+      "name": "motion_video",
+      "type": "video",
+      "required": true,
+      "default": null
+    },
+    {
+      "name": "character_image",
+      "type": "image",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "clip_range",
+      "type": "text",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "aspect_ratio",
+      "type": "text",
+      "required": false,
+      "default": null
+    }
+  ],
+  "paid_tools": [
+    "video_generation"
+  ],
+  "preview": {
+    "cover": "preview/cover.jpg",
+    "video": "preview/demo.mp4"
+  },
+  "evals": [
+    {
+      "id": "happy-path",
+      "prompt": "我上传了一段 12 秒的跳舞视频（一个女生在客厅跳 K-pop 舞），还上传了一张我设计的卡通狐狸角色图。想让这只狐狸跳一样的舞，用视频第 0 到 8 秒，竖屏。",
+      "expected_output": "确认动作来源、片段和角色替换关系，说明先检查当前模型是否支持动作参考视频加角色图，再说明会花积分并等用户确认。",
+      "assertions": [
+        "说明视频提供动作、狐狸图提供外观",
+        "说明先确认工具支持动作参考，不支持时不改用普通文生视频",
+        "生成前先说明会花积分并请用户确认",
+        "不声称已经看过视频或描述具体舞步"
+      ]
+    },
+    {
+      "id": "missing-inputs",
+      "prompt": "把我这张卡通狐狸图做成跳舞视频，跳抖音上很火的那段舞。",
+      "expected_output": "追问动作参考视频，说明舞蹈名称或截图不能代替动作视频。",
+      "assertions": [
+        "追问动作参考视频",
+        "不凭舞蹈名称编造具体动作",
+        "不改用普通文生视频冒充动作复刻",
+        "拿到视频前不开始付费生成"
+      ]
+    }
+  ]
+}

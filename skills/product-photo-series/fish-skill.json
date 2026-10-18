@@ -1,0 +1,92 @@
+{
+  "id": "product-photo-series",
+  "version": "0.4.0-candidate.6",
+  "title": {
+    "en": "Product Photo Series",
+    "es": "Serie de fotos de producto",
+    "pt": "Série de fotos de produto",
+    "ja": "商品写真セット",
+    "ru": "Серия фото товара",
+    "fr": "Série de photos produit",
+    "de": "Produktfoto-Serie",
+    "ar": "سلسلة صور المنتج",
+    "zh-CN": "电商产品组图",
+    "ko": "제품 사진 세트"
+  },
+  "description": {
+    "en": "Turns photos of your real product into studio, usage-scene and detail images for online stores and ads, keeping its shape, colors and labels.",
+    "es": "Convierte las fotos de tu producto real en imágenes de estudio, de uso y de detalle para tiendas en línea y anuncios, conservando su forma, colores y etiquetas.",
+    "pt": "Transforma fotos do seu produto real em imagens de estúdio, de uso e de detalhe para lojas online e anúncios, mantendo forma, cores e rótulos.",
+    "ja": "実物の商品写真をもとに、形・色・ラベルを保ったまま、ECサイトや広告向けのスタジオ写真・使用シーン・ディテール画像を作ります。",
+    "ru": "Превращает фото вашего реального товара в студийные, сюжетные и детальные снимки для интернет-магазинов и рекламы с сохранением формы, цветов и надписей.",
+    "fr": "Transforme les photos de votre produit réel en images studio, en situation et de détail pour l'e-commerce et la publicité, en conservant sa forme, ses couleurs et ses étiquettes.",
+    "de": "Macht aus Fotos Ihres echten Produkts Studio-, Anwendungs- und Detailbilder für Onlineshops und Anzeigen und behält dabei Form, Farben und Etiketten bei.",
+    "ar": "يحوّل صور منتجك الحقيقي إلى صور استوديو ومشاهد استخدام ولقطات تفصيلية للمتاجر الإلكترونية والإعلانات، مع الحفاظ على شكله وألوانه وملصقاته.",
+    "zh-CN": "用真实产品照片做出棚拍主图、使用场景图和细节图，用于电商页面和广告，保留产品的外形、颜色和标签。",
+    "ko": "실제 제품 사진으로 온라인 쇼핑몰과 광고용 스튜디오 컷, 사용 장면, 디테일 이미지를 만들며 제품의 형태, 색상, 라벨을 그대로 유지합니다."
+  },
+  "inputs": [
+    {
+      "name": "product_photos",
+      "type": "image",
+      "required": true,
+      "default": null
+    },
+    {
+      "name": "intended_use",
+      "type": "text",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "image_count",
+      "type": "number",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "aspect_ratio",
+      "type": "text",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "style_reference",
+      "type": "image",
+      "required": false,
+      "default": null
+    }
+  ],
+  "paid_tools": [
+    "image_generation",
+    "image_edit"
+  ],
+  "preview": {
+    "cover": "preview/cover.jpg",
+    "video": "preview/demo.mp4"
+  },
+  "evals": [
+    {
+      "id": "happy-path",
+      "prompt": "我上传了 3 张保温杯的照片（正面、侧面、杯盖特写）。杯身是哑光墨绿色，印着白色品牌字样。想做一组淘宝详情页用的图，3 张，比例 1:1，风格干净一点。",
+      "expected_output": "按技能流程给出 3 张图的分工（如主图、使用场景、细节），说明用产品照片做参考，先说明会花积分并等用户确认再生成。",
+      "assertions": [
+        "3 张图各有不同用途，不是只换背景",
+        "生成前先说明会花积分并请用户确认",
+        "不编造照片里看不到的参数（如容量、材质、保温时长）",
+        "不声称已经生成了图片"
+      ]
+    },
+    {
+      "id": "missing-inputs",
+      "prompt": "帮我给这款保温杯拍一组电商主图，要干净高级一点。",
+      "expected_output": "请用户上传产品照片；说明没有照片只能做概念图，不能还原真实产品。",
+      "assertions": [
+        "请用户上传产品照片",
+        "说明没有照片只能做概念图",
+        "不编造产品外观或参数",
+        "拿到照片前不开始付费生成"
+      ]
+    }
+  ]
+}

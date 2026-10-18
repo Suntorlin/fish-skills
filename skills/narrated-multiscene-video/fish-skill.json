@@ -1,0 +1,94 @@
+{
+  "id": "narrated-multiscene-video",
+  "version": "0.1.0-candidate.6",
+  "title": {
+    "en": "Narrated Multi-Scene Video",
+    "es": "Video narrado de varias escenas",
+    "pt": "Vídeo narrado com várias cenas",
+    "ja": "ナレーション付きマルチシーン動画",
+    "ru": "Многосценовое видео с озвучкой",
+    "fr": "Vidéo narrée multi-scènes",
+    "de": "Vertontes Video mit mehreren Szenen",
+    "ar": "فيديو متعدد المشاهد بتعليق صوتي",
+    "zh-CN": "多场景解说视频",
+    "ko": "내레이션 멀티씬 영상"
+  },
+  "description": {
+    "en": "Turns your topic or script into one finished narrated video with several scenes, consistent characters and a voice-over aligned to each scene.",
+    "es": "Convierte tu tema o guion en un video narrado terminado, con varias escenas, personajes coherentes y una voz en off alineada con cada escena.",
+    "pt": "Transforma seu tema ou roteiro em um vídeo narrado pronto, com várias cenas, personagens consistentes e narração alinhada a cada cena.",
+    "ja": "テーマや台本から、複数のシーン、一貫したキャラクター、各シーンに合わせたナレーションを備えた完成動画を1本作ります。",
+    "ru": "Превращает вашу тему или сценарий в готовое видео с озвучкой: несколько сцен, единые персонажи и закадровый голос под каждую сцену.",
+    "fr": "Transforme votre sujet ou votre script en une vidéo narrée finie, avec plusieurs scènes, des personnages cohérents et une voix off calée sur chaque scène.",
+    "de": "Macht aus Ihrem Thema oder Skript ein fertiges vertontes Video mit mehreren Szenen, gleichbleibenden Figuren und passendem Voice-over zu jeder Szene.",
+    "ar": "يحوّل موضوعك أو نصك إلى فيديو واحد جاهز بتعليق صوتي، يضم عدة مشاهد وشخصيات متسقة وتعليقًا صوتيًا متزامنًا مع كل مشهد.",
+    "zh-CN": "把你的主题或脚本做成一条完整的解说视频，包含多个场景、前后一致的角色，以及和每个场景对齐的配音。",
+    "ko": "주제나 대본을 여러 장면, 일관된 캐릭터, 장면별로 맞춘 내레이션이 담긴 완성 영상 한 편으로 만듭니다."
+  },
+  "inputs": [
+    {
+      "name": "topic_or_script",
+      "type": "long_text",
+      "required": true,
+      "default": null
+    },
+    {
+      "name": "character_reference",
+      "type": "image",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "duration_seconds",
+      "type": "number",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "aspect_ratio",
+      "type": "text",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "narration_voice",
+      "type": "text",
+      "required": false,
+      "default": null
+    }
+  ],
+  "paid_tools": [
+    "image_generation",
+    "image_edit",
+    "video_generation",
+    "tts"
+  ],
+  "preview": {
+    "cover": "preview/cover.jpg",
+    "video": "preview/demo.mp4"
+  },
+  "evals": [
+    {
+      "id": "happy-path",
+      "prompt": "帮我做一条 60 秒左右的科普短视频，竖屏 9:16。主题是「一滴水的旅行」：主角是一颗卡通小水滴，从海里蒸发、变成云、下雨落到山上，最后流回大海。旁白用温柔的普通话女声，面向小学生。",
+      "expected_output": "拆出多个场景，写清每场的起始状态、动作、结束状态和旁白；说明用同一个水滴形象保持一致，旁白单独配音并按实测时长分配；先说明会花积分并等用户确认。",
+      "assertions": [
+        "按开始、变化、结尾拆出多个场景，每场有旁白",
+        "说明用同一个水滴参考图保持角色一致",
+        "说明旁白单独配音，不只把台词写进视频提示词",
+        "生成前先说明会花积分并请用户确认"
+      ]
+    },
+    {
+      "id": "missing-inputs",
+      "prompt": "帮我做一条竖屏解说视频，60 秒左右，要有旁白。",
+      "expected_output": "追问视频主题或脚本，不自己编故事就开始生成。",
+      "assertions": [
+        "追问视频主题或脚本",
+        "不自己编造主题后直接生成",
+        "不重复追问已给出的时长、画幅和旁白要求",
+        "拿到主题前不开始付费生成"
+      ]
+    }
+  ]
+}

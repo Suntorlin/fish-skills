@@ -1,0 +1,87 @@
+{
+  "id": "ugc-product-video",
+  "version": "0.3.0-candidate.5",
+  "title": {
+    "en": "UGC Product Video",
+    "es": "Video UGC de producto",
+    "pt": "Vídeo UGC de produto",
+    "ja": "UGC風商品動画",
+    "ru": "UGC-видео о товаре",
+    "fr": "Vidéo produit UGC",
+    "de": "UGC-Produktvideo",
+    "ar": "فيديو منتج بأسلوب UGC",
+    "zh-CN": "UGC 带货短视频",
+    "ko": "UGC 제품 영상"
+  },
+  "description": {
+    "en": "Turns photos of your real product into a short faceless promo video with product shots or hands-on demos and a matching voice-over.",
+    "es": "Convierte las fotos de tu producto real en un video promocional corto sin rostros, con tomas del producto o demostraciones con las manos y una voz en off a juego.",
+    "pt": "Transforma fotos do seu produto real em um vídeo promocional curto sem rostos, com tomadas do produto ou demonstrações com as mãos e narração adequada.",
+    "ja": "実物の商品写真から、顔出しなしで商品カットや手元の使用デモにナレーションを付けた短いPR動画を作ります。",
+    "ru": "Превращает фото вашего реального товара в короткий промо-ролик без лиц: кадры товара или демонстрация в руках и подходящий закадровый голос.",
+    "fr": "Transforme les photos de votre produit réel en courte vidéo promotionnelle sans visage, avec plans produit ou démonstrations à la main et une voix off adaptée.",
+    "de": "Macht aus Fotos Ihres echten Produkts ein kurzes Promo-Video ohne Gesichter, mit Produktaufnahmen oder Hand-Demos und passendem Voice-over.",
+    "ar": "يحوّل صور منتجك الحقيقي إلى فيديو ترويجي قصير بلا وجوه، يضم لقطات للمنتج أو عروض استخدام باليد مع تعليق صوتي مناسب.",
+    "zh-CN": "用真实产品照片做一条不露脸的带货短视频，包含产品展示或手部使用演示，并配上旁白。",
+    "ko": "실제 제품 사진으로 얼굴이 나오지 않는 짧은 홍보 영상을 만들며, 제품 컷이나 손 사용 시연에 맞는 내레이션을 더합니다."
+  },
+  "inputs": [
+    {
+      "name": "product_photos",
+      "type": "image",
+      "required": true,
+      "default": null
+    },
+    {
+      "name": "selling_points",
+      "type": "long_text",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "aspect_ratio",
+      "type": "text",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "duration_seconds",
+      "type": "number",
+      "required": false,
+      "default": null
+    }
+  ],
+  "paid_tools": [
+    "image_edit",
+    "video_generation",
+    "tts"
+  ],
+  "preview": {
+    "cover": "preview/cover.jpg",
+    "video": "preview/demo.mp4"
+  },
+  "evals": [
+    {
+      "id": "happy-path",
+      "prompt": "我上传了 4 张便携榨汁杯的照片（正面、侧面、杯盖按键特写、拆开的刀头）。卖点：USB-C 充电，一键启动，杯身可以直接当水杯用。想做一条 15 秒左右的竖屏抖音带货视频，不露脸，用手演示，配中文女声旁白。",
+      "expected_output": "给出可调整的分镜表（每镜目的、动作、时长、旁白），旁白只用用户给的卖点和照片可见特征，说明配音方式，先说明会花积分并等用户确认。",
+      "assertions": [
+        "给出分镜方案，每镜写清动作和旁白",
+        "旁白只用用户给的卖点，不添加续航、容量等未提供的参数",
+        "生成前先说明会花积分并请用户确认",
+        "不声称已经生成或看过视频"
+      ]
+    },
+    {
+      "id": "missing-inputs",
+      "prompt": "帮我做一条便携榨汁杯的带货短视频，15 秒，竖屏，要有旁白。",
+      "expected_output": "请用户上传真实产品照片，不凭想象编造产品外观就开始生成。",
+      "assertions": [
+        "请用户上传产品照片",
+        "不编造产品外观或参数",
+        "不重复追问已给出的时长、画幅和旁白要求",
+        "拿到照片前不开始付费生成"
+      ]
+    }
+  ]
+}

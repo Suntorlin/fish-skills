@@ -1,0 +1,86 @@
+{
+  "id": "character-sheet",
+  "version": "0.1.0-candidate.3",
+  "title": {
+    "en": "Character Sheet",
+    "es": "Hoja de personaje",
+    "pt": "Folha de personagem",
+    "ja": "キャラクター設定画",
+    "ru": "Лист персонажа",
+    "fr": "Fiche de personnage",
+    "de": "Charakterblatt",
+    "ar": "ورقة الشخصية",
+    "zh-CN": "角色设定图",
+    "ko": "캐릭터 시트"
+  },
+  "description": {
+    "en": "Creates a reference sheet that shows one character in the views, expressions or outfits you choose, with the same identity in every panel.",
+    "es": "Crea una hoja de referencia con un mismo personaje en las vistas, expresiones o atuendos que elijas, manteniendo su identidad en cada panel.",
+    "pt": "Cria uma folha de referência com o mesmo personagem nas vistas, expressões ou roupas que você escolher, mantendo a identidade em todos os painéis.",
+    "ja": "選んだ角度・表情・衣装で同じキャラクターを並べた設定画を作り、どのパネルでも同じキャラクターに見えるよう保ちます。",
+    "ru": "Создаёт референс-лист с одним персонажем в выбранных ракурсах, эмоциях или нарядах и сохраняет его облик на каждой панели.",
+    "fr": "Crée une planche de référence montrant un même personnage dans les vues, expressions ou tenues choisies, avec la même identité dans chaque case.",
+    "de": "Erstellt ein Referenzblatt mit einer Figur in den gewünschten Ansichten, Ausdrücken oder Outfits und hält ihr Aussehen in jedem Feld gleich.",
+    "ar": "ينشئ ورقة مرجعية تعرض شخصية واحدة بالزوايا أو التعابير أو الأزياء التي تختارها، مع الحفاظ على هويتها في كل لوحة.",
+    "zh-CN": "把同一个角色按你要的视角、表情或服装排成一张设定图，每格都保持同一个角色形象。",
+    "ko": "원하는 시점, 표정, 의상으로 한 캐릭터를 보여 주는 설정 시트를 만들고, 모든 칸에서 같은 캐릭터로 유지합니다."
+  },
+  "inputs": [
+    {
+      "name": "character_brief",
+      "type": "long_text",
+      "required": true,
+      "default": null
+    },
+    {
+      "name": "character_reference",
+      "type": "image",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "panels",
+      "type": "text",
+      "required": false,
+      "default": null
+    },
+    {
+      "name": "visual_style",
+      "type": "text",
+      "required": false,
+      "default": null
+    }
+  ],
+  "paid_tools": [
+    "image_generation",
+    "image_edit"
+  ],
+  "preview": {
+    "cover": "preview/cover.jpg",
+    "video": "preview/demo.mp4"
+  },
+  "evals": [
+    {
+      "id": "happy-path",
+      "prompt": "帮我做一张角色设定图：24 岁女剑客，黑色高马尾，左眼下有一颗泪痣，穿深蓝色短款道袍，腰间右侧挂一块白玉佩。要正面、侧面、背面三视图，日系动画风格，白底。",
+      "expected_output": "复述角色设定，规划正、侧、背三格的排版，说明用生图工具出一张设定图，先说明会花积分并等用户确认。",
+      "assertions": [
+        "按正面、侧面、背面三个视角规划画面",
+        "保留用户给出的发型、泪痣、服装和玉佩",
+        "生成前先说明会花积分并请用户确认",
+        "不声称已经生成了图片"
+      ]
+    },
+    {
+      "id": "missing-inputs",
+      "prompt": "帮我做一张角色设定图，要正面、侧面、背面三视图。",
+      "expected_output": "追问要画哪个角色（文字描述或参考图），不自己编一个角色就开始生成。",
+      "assertions": [
+        "追问角色描述或参考图",
+        "不自己编造角色后直接生成",
+        "不重复追问已给出的三视图要求",
+        "拿到角色信息前不开始付费生成"
+      ]
+    }
+  ]
+}

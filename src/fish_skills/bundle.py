@@ -10,6 +10,7 @@ import zipfile
 from pathlib import Path, PurePosixPath
 
 MAX_FILE_BYTES = 512 * 1024
+PREVIEW_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp", ".mp4"}
 VERSION = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9]+(?:[.-][a-z0-9]+)*)?")
 SKILL_ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 
@@ -74,6 +75,11 @@ def build(root: Path, output: Path) -> dict:
             continue
         name = path.relative_to(root).as_posix()
         safe_path(name)
+        # skills/<id>/preview/ holds the marketplace cover and demo video (see fish-skill.json). They are checked by
+        # the skill market on sync, not shipped to the agent, so they stay out of the payload.
+        parts = name.split("/")
+        if len(parts) == 4 and parts[2] == "preview" and path.suffix in PREVIEW_SUFFIXES:
+            continue
         if path.suffix not in {".md", ".json", ".py"} or path.name.startswith("."):
             raise ValueError(f"Unexpected payload: {name}")
         data = path.read_bytes()
