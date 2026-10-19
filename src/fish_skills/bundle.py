@@ -75,7 +75,7 @@ def build(root: Path, output: Path) -> dict:
             continue
         name = path.relative_to(root).as_posix()
         safe_path(name)
-        # skills/<id>/preview/ holds the marketplace cover and demo video (see fish-skill.json). They are checked by
+        # skills/<id>/preview/ holds the marketplace cover and demo video (see skill.json). They are checked by
         # the skill market on sync, not shipped to the agent, so they stay out of the payload.
         parts = name.split("/")
         if len(parts) == 4 and parts[2] == "preview" and path.suffix in PREVIEW_SUFFIXES:
